@@ -1,5 +1,5 @@
 import requests
-import beautifulsoup4
+from bs4 import BeautifulSoup
 
 
 #dictionary of teams and their nba.com team_id
@@ -8,12 +8,10 @@ team_id = {
 }
 
 stats_url = "https://www.nba.com/stats/players/advanced?"
+#print(f"{stats_url}TeamID={team_id['warriors_id']}")
 
-print(stats_url + team_id["warriors_id"])
-
-
-r = requests.get(stats_url + team_id["warriors_id"])
-soup = beautifulsoup4(r, "html.parser")
+r = requests.get(f"{stats_url}TeamID={team_id['warriors_id']}")
+soup = BeautifulSoup(r, "html.parser")
 
 players = soup.find_all("a", attrs={"class":"Anchor_anchor__cSc3P"})
 
