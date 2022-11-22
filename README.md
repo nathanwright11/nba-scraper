@@ -1,1 +1,1 @@
-This is a personal project meant to practice web scraping. I scrape nba player stats from nba.com & basketball-reference.com which I save to a csv and use in a machine learning model.
+This is a personal project meant to practice web scraping. I use requests & bs4 to scrape nba player stats from nba.com & basketball-reference.com. The data I scrape is saved to a csv which I then use in a machine learning model.
