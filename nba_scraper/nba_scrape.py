@@ -11,9 +11,15 @@ stats_url = "https://www.nba.com/stats/players/advanced?"
 #print(f"{stats_url}TeamID={team_id['warriors_id']}")
 
 r = requests.get(f"{stats_url}TeamID={team_id['warriors_id']}")
-soup = BeautifulSoup(r, "html.parser")
+#print(r.content)
 
-players = soup.find_all("a", attrs={"class":"Anchor_anchor__cSc3P"})
+soup = BeautifulSoup(r.content, "html.parser")
 
-for player in players:
-    print(player.text)
+#players = soup.find_all("a", attrs={"class":"Anchor_anchor__cSc3P"})
+#players = soup.find_all("div", attrs={"class":"Layout_mainContent__jXliI"})
+players = soup.find_all("tr")
+
+# for player in players:
+#     print(player.text)
+
+print(players)
