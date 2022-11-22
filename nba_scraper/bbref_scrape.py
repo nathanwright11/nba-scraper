@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import numpy as np
 
 r = requests.get("https://www.basketball-reference.com/teams/GSW/2023.html")
 soup = BeautifulSoup(r.content, "html.parser")
@@ -7,14 +8,20 @@ soup = BeautifulSoup(r.content, "html.parser")
 totals = soup.find(id="totals")
 
 #Isolates the data headers (rank, name, age, stat_categories)
-# t_head = totals.find("thead")
+t_head = totals.find("thead")
 
-# #Collects all the stat categories (with HTML tags)
-# headers = t_head.find_all("th")
+#Collects all the stat categories (with HTML tags)
+headers = t_head.find_all("th")
 
-# #Removes HTML tags and puts all categories into an array. One entry will be trash and 
-# #needs to be replaced with 'name' category
-# stat_ctgs = [header.text for header in headers]
+#Removes HTML tags and puts all categories into an array. One entry will be trash and 
+#needs to be replaced with 'name' category
+stat_ctgs = [header.text for header in headers]
+#Removes rank category
+stat_ctgs.remove("Rk")
+#Replaces trash entry with 'Name' category
+stat_ctgs[0] = 'Name'
+#Converts list to array
+stat_ctgs = np.array(stat_ctgs)
 
 
 #Isolates the player stats
@@ -25,4 +32,9 @@ players = t_body.find_all("td")
 
 #Removes HTML tags and puts all categories into an array
 player_stats = [player.text for player in players]
-print(player_stats)
+#Converys list to array
+player_stats = np.array(player_stats)
+
+#Splits up player_stats array into individual arrays of each player. Need to add a
+#way to determine/verify number of players in the table
+player_stats = np.split(player_stats, 15)
