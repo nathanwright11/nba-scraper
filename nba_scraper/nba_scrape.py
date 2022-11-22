@@ -19,7 +19,5 @@ soup = BeautifulSoup(r.content, "html.parser")
 #players = soup.find_all("div", attrs={"class":"Layout_mainContent__jXliI"})
 players = soup.find_all("tr")
 
-# for player in players:
-#     print(player.text)
-
-print(players)
+for player in players:
+    print(player.text)
