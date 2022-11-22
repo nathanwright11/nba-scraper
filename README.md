@@ -1,0 +1,1 @@
+This is a personal project meant to practice web scraping. I scrape nba player stats from nba.com & basketball-reference.com which I save to a csv and use in a machine learning model.
