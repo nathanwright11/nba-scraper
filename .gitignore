@@ -1,2 +1,5 @@
 # Ignore all csv files
 *.csv
+
+#Ignore nba.com script (until it works)
+nba_scrape.py
