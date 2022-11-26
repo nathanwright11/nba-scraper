@@ -42,7 +42,7 @@ player_stats = np.array(player_stats)
 player_stats = np.split(player_stats, 15)
 
 #Writing the stats to a csv file
-with open('player_stats.csv', 'w', newline="") as f:
+with open('team_stats.csv', 'w', newline="") as f:
     writer = csv.writer(f)
     #Adds header with format (rank, name, age, stat_categories)
     writer.writerow(header)
