@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-import numpy as np
+#import numpy as np
 import csv
 
 
@@ -18,8 +18,12 @@ reg_stat = soup.find("table", id="pgl_basic")
 #Isolates stat categories
 thead = reg_stat.find("thead")
 #Grabs stats categories
-stat_ctgs = thead.text
-print(stat_ctgs)
+stat_html = thead.find_all("th")
+
+stat_ctgs = []
+for stat in stat_html:
+    stat_ctgs.append(stat.text)
+
 #Isolates game stats
 tbody = reg_stat.find("tbody")
 games = tbody.find_all("tr")
@@ -42,4 +46,14 @@ for game in games:
     #Adds the stats array to the game_log array so each game is their own array
     game_log.append(stats)
 
-print(game_log[0])
+
+#Writing the stats to a csv file
+with open('curry_games.csv', 'w', newline="") as f:
+    writer = csv.writer(f)
+    #Adds header with format (rank, name, age, stat_categories)
+    writer.writerow(stat_ctgs)
+    #Adds each player's stats on their own row
+    for game in game_log:
+        writer.writerow(game)
+
+print("CSV file updated")
