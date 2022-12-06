@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-#import numpy as np
 import csv
 
 
@@ -102,4 +101,5 @@ for i in range(prev_yrs):
     #Writes game stats to csv
     write_csv(header, game_logs, year)
 
+    #decrements year for url
     year -= 1
